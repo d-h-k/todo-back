@@ -29,4 +29,8 @@ public class TodoService {
     public void delete(String id) {
         //소델로 구현
     }
+
+    public Todo read(String id) {
+        todoRepository.findById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.dong.todo.connect;
 
+import com.dong.common.ApiResultWrapper;
 import com.dong.todo.domain.Todo;
 import com.dong.todo.dto.TodoDtoRequest;
 import com.dong.todo.dto.TodoDtoResponse;
@@ -18,9 +19,15 @@ public class TodoController {
         this.todoService = todoService;
     }
 
-    @SuppressWarnings("이런짓좀 제발 하지 말라는 의미에서 남겨줌")
+    @GetMapping("/{id}")
+    public ApiResultWrapper<?> read(@PathVariable String id) {
+        TodoDtoResponse response = new TodoDtoResponse(todoService.read(id));
+
+        wrapOk()
+    }
+
     @GetMapping
-    public String antiPatternSample() {
+    public TodoDtoResponse readMany() {
         return "hello world!";
     }
 

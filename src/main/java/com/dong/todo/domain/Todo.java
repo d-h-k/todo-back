@@ -21,6 +21,7 @@ public class Todo {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
+
     private String userId;
     private String title;
     private boolean done;
