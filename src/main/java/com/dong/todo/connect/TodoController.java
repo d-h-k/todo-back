@@ -1,9 +1,9 @@
 package com.dong.todo.connect;
 
-import io.dong.westsea.todo.domain.Todo;
-import io.dong.westsea.todo.dto.TodoDtoRequest;
-import io.dong.westsea.todo.dto.TodoDtoResponse;
-import io.dong.westsea.todo.service.TodoService;
+import com.dong.todo.domain.Todo;
+import com.dong.todo.dto.TodoDtoRequest;
+import com.dong.todo.dto.TodoDtoResponse;
+import com.dong.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class TodoController {
 
+    private final TodoService todoService;
+
     @Autowired
     TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
 
-    private final TodoService todoService;
-
     @SuppressWarnings("이런짓좀 제발 하지 말라는 의미에서 남겨줌")
     @GetMapping
-    public String antiPatternSample(){
+    public String antiPatternSample() {
         return "hello world!";
     }
 
     @PostMapping
-    public TodoDtoResponse create(@RequestBody TodoDtoRequest todoDtoRequest){
+    public TodoDtoResponse create(@RequestBody TodoDtoRequest todoDtoRequest) {
 
 
         Todo todo = todoService.createTodo(todoDtoRequest.toEntity());

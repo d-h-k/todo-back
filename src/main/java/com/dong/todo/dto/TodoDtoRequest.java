@@ -1,6 +1,6 @@
 package com.dong.todo.dto;
 
-import io.dong.westsea.todo.domain.Todo;
+import com.dong.todo.domain.Todo;
 import lombok.*;
 
 @Builder
@@ -15,7 +15,7 @@ public class TodoDtoRequest {
     private boolean done;
 
     public TodoDtoRequest(final Todo todo) {
-         todo.getId();
+        todo.getId();
     }
 
     public Todo toEntity() {
