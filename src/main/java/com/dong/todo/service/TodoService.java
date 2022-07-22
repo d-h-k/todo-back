@@ -3,6 +3,7 @@ package com.dong.todo.service;
 import com.dong.todo.domain.Todo;
 import com.dong.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -31,6 +32,11 @@ public class TodoService {
     }
 
     public Todo read(String id) {
-        todoRepository.findById(id);
+        //todoRepository.findById(id);
+        return null;
+    }
+
+    public Page<Todo> readAll() {
+        return null;
     }
 }

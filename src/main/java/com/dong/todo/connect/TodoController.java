@@ -6,7 +6,11 @@ import com.dong.todo.dto.TodoDtoRequest;
 import com.dong.todo.dto.TodoDtoResponse;
 import com.dong.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static com.dong.common.ApiResultWrapper.wrapOk;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,14 +24,17 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public ApiResultWrapper<?> read(@PathVariable String id) {
+    public ResponseEntity<?> read(@PathVariable String id) {
         TodoDtoResponse response = new TodoDtoResponse(todoService.read(id));
 
-        wrapOk()
+        return wrapOk(response)
+                .jsonResponse();
     }
 
     @GetMapping
-    public TodoDtoResponse readMany() {
+    public ResponseEntity<?> readMany() {
+        Page<Todo> todos = todoService.readAll();
+
         return "hello world!";
     }
 
