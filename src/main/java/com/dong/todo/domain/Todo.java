@@ -34,4 +34,8 @@ public class Todo {
         this.done = todo.done;
         this.deleted = todo.deleted;
     }
+
+    public void delete() {
+        this.deleted = true;
+    }
 }
