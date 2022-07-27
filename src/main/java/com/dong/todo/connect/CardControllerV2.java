@@ -46,7 +46,7 @@ public class CardControllerV2 {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CardDtoRequest cardDtoRequest) {//업데이트용 dto
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CardDtoRequest cardDtoRequest) {
         Card updatedTod = cardService.update(id, cardDtoRequest.toEntity());
         CardDtoResponse response = new CardDtoResponse(updatedTod);
 
