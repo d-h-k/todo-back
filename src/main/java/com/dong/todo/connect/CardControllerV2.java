@@ -1,9 +1,9 @@
 package com.dong.todo.connect;
 
-import com.dong.todo.domain.Todo;
-import com.dong.todo.dto.TodoDtoRequest;
-import com.dong.todo.dto.TodoDtoResponse;
-import com.dong.todo.service.TodoService;
+import com.dong.todo.domain.Card;
+import com.dong.todo.dto.CardDtoRequest;
+import com.dong.todo.dto.CardDtoResponse;
+import com.dong.todo.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,39 +15,39 @@ import static com.dong.common.ResponseWrapper.wrapOk;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v2")
-public class TodoControllerV2 {
+public class CardControllerV2 {
 
-    private final TodoService todoService;
+    private final CardService cardService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
-        TodoDtoResponse response = new TodoDtoResponse(todoService.read(id));
-        todoService.read(id);
+        CardDtoResponse response = new CardDtoResponse(cardService.read(id));
+        cardService.read(id);
         return wrapOk(response)
                 .jsonResponse();
     }
 
     @GetMapping
     public ResponseEntity<?> readMany() {
-        Page<Todo> todos = todoService.readAll();
+        Page<Card> todos = cardService.readAll();
 
         return wrapOk(todos)
                 .jsonResponse();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody TodoDtoRequest todoDtoRequest) {
-        Todo addedTodo = todoService.addTodo(todoDtoRequest.toEntity());
-        TodoDtoResponse response = new TodoDtoResponse(addedTodo);
+    public ResponseEntity<?> create(@RequestBody CardDtoRequest cardDtoRequest) {
+        Card addedCard = cardService.addTodo(cardDtoRequest.toEntity());
+        CardDtoResponse response = new CardDtoResponse(addedCard);
 
         return wrapCreated(response)
                 .jsonResponse();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody TodoDtoRequest todoDtoRequest) {//업데이트용 dto
-        Todo updatedTod = todoService.update(id, todoDtoRequest.toEntity());
-        TodoDtoResponse response = new TodoDtoResponse(updatedTod);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CardDtoRequest cardDtoRequest) {//업데이트용 dto
+        Card updatedTod = cardService.update(id, cardDtoRequest.toEntity());
+        CardDtoResponse response = new CardDtoResponse(updatedTod);
 
         return wrapOk(response)
                 .jsonResponse();
@@ -55,7 +55,7 @@ public class TodoControllerV2 {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Long deleteId = todoService.delete(id);
+        Long deleteId = cardService.delete(id);
 
         return wrapOk(deleteId)
                 .jsonResponse();

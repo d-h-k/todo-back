@@ -1,6 +1,6 @@
 package com.dong.todo.dto;
 
-import com.dong.todo.domain.Todo;
+import com.dong.todo.domain.Card;
 import lombok.*;
 
 @Builder
@@ -8,17 +8,17 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TodoDtoRequest {
+public class CardDtoRequest {
 
     private String id;
     private String title;
     private boolean done;
 
-    public TodoDtoRequest(final Todo todo) {
-        todo.getId();
+    public CardDtoRequest(final Card card) {
+        card.getId();
     }
 
-    public Todo toEntity() {
-        return new Todo();
+    public Card toEntity() {
+        return new Card();
     }
 }

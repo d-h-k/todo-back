@@ -1,7 +1,6 @@
 package com.dong.todo.domain;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -11,8 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "todo")
-public class Todo {
+@Table(name = "card")
+public class Card {
 
     @Id
     //@GeneratedValue(generator = "system-uuid")
@@ -27,12 +26,12 @@ public class Todo {
     private boolean deleted;
 
 
-    public void update(Todo todo) {
-        this.userId = todo.userId;
-        this.title = todo.title;
-        this.rank = todo.rank;
-        this.done = todo.done;
-        this.deleted = todo.deleted;
+    public void update(Card card) {
+        this.userId = card.userId;
+        this.title = card.title;
+        this.rank = card.rank;
+        this.done = card.done;
+        this.deleted = card.deleted;
     }
 
     public void delete() {
