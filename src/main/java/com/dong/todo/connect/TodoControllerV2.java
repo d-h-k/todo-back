@@ -1,6 +1,5 @@
 package com.dong.todo.connect;
 
-import com.dong.common.ApiResultWrapper;
 import com.dong.todo.domain.Todo;
 import com.dong.todo.dto.TodoDtoRequest;
 import com.dong.todo.dto.TodoDtoResponse;
@@ -10,23 +9,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.dong.common.ApiResultWrapper.wrapCreated;
 import static com.dong.common.ApiResultWrapper.wrapOk;
 
 @RestController
 @RequestMapping("/api/v1")
-public class TodoController {
+public class TodoControllerV2 {
 
     private final TodoService todoService;
 
     @Autowired
-    TodoController(TodoService todoService) {
+    TodoControllerV2(TodoService todoService) {
         this.todoService = todoService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> read(@PathVariable String id) {
+    public ResponseEntity<?> read(@PathVariable Long id) {
         TodoDtoResponse response = new TodoDtoResponse(todoService.read(id));
-
+        todoService.read(id);
         return wrapOk(response)
                 .jsonResponse();
     }
@@ -34,16 +34,15 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<?> readMany() {
         Page<Todo> todos = todoService.readAll();
-
-        return "hello world!";
+        return wrapOk(todos)
+                .jsonResponse();
     }
 
     @PostMapping
-    public TodoDtoResponse create(@RequestBody TodoDtoRequest todoDtoRequest) {
-
-
+    public ResponseEntity<?> create(@RequestBody TodoDtoRequest todoDtoRequest) {
         Todo todo = todoService.createTodo(todoDtoRequest.toEntity());
-        return new TodoDtoResponse(todo);
+        return wrapCreated(todo)
+                .jsonResponse();
     }
 
     @PutMapping
