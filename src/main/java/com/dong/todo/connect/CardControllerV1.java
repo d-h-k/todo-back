@@ -24,7 +24,7 @@ public class CardControllerV1 {
     }
 
     @GetMapping("/{id}")
-    public Object write(@PathVariable Long id,@RequestBody CardDtoRequest cardDtoRequest) {
+    public Object write(@PathVariable Long id, @RequestBody CardDtoRequest cardDtoRequest) {
         cardService.update(id, cardDtoRequest.toEntity());
         return null;
     }

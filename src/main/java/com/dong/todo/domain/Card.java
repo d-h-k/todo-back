@@ -41,6 +41,7 @@ public class Card {
     public void delete() {
         this.deleted = true;
     }
+
     public void unDelete() {
         this.deleted = false;
     }

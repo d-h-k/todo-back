@@ -23,6 +23,7 @@ public class CardControllerV2 {
     public ResponseEntity<?> read(@PathVariable Long id) {
         CardDtoResponse response = new CardDtoResponse(cardService.read(id));
         cardService.read(id);
+
         return wrapOk(response)
                 .jsonResponse();
     }
