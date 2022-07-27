@@ -1,4 +1,4 @@
-package com.dong.account.service;
+package com.dong.account.exception;
 
 public class NoSuchAccountException extends RuntimeException{
 }

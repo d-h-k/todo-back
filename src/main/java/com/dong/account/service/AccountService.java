@@ -3,6 +3,7 @@ package com.dong.account.service;
 import com.dong.account.dto.AccountResponseDto;
 import com.dong.account.entity.Account;
 import com.dong.account.entity.AccountType;
+import com.dong.account.exception.NoSuchAccountException;
 import com.dong.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
