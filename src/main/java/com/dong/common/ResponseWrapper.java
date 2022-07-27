@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 public class ResponseWrapper<T> {
 
-    private HttpStatus status;
-    private T contents;
-    private String message;
+    private final HttpStatus status;
+    private final T contents;
+    private final String message;
 
     @SuppressWarnings("unchecked : type casting is safe")
     public static <T> ResponseWrapper<T> wrapOk(T contents) {
