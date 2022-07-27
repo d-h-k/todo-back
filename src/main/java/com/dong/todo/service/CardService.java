@@ -17,10 +17,10 @@ public class CardService {
     }
 
     public Card update(Long id, Card card) {
-        Card origin = cardRepository.findById(id)
+        Card originCard = cardRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
-        origin.update(card);
-        return origin;
+        originCard.update(card);
+        return originCard;
     }
 
     public Long delete(Long id) {
@@ -31,8 +31,8 @@ public class CardService {
     }
 
     public Card read(Long id) {
-        //todoRepository.findById(id);
-        return null;
+        return cardRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public Page<Card> readAll() {
