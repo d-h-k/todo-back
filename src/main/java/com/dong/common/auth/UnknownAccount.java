@@ -1,7 +1,5 @@
 package com.dong.common.auth;
 
-import com.community.account.entity.Account;
-import com.community.account.entity.AccountType;
 import com.dong.account.entity.Account;
 import com.dong.account.entity.AccountType;
 
