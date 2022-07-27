@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/card/v1")
 public class CardControllerV1 {
 
     private final CardService cardService;
@@ -23,13 +23,13 @@ public class CardControllerV1 {
         return cardService.read(id);
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
     public Object write(@PathVariable Long id, @RequestBody CardDtoRequest cardDtoRequest) {
         cardService.update(id, cardDtoRequest.toEntity());
         return null;
     }
 
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public Object delete(@PathVariable Long id) {
         return cardService.delete(id);
     }

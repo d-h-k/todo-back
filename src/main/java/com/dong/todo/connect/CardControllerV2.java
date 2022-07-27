@@ -14,7 +14,7 @@ import static com.dong.common.ResponseWrapper.wrapOk;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v2")
+@RequestMapping("/api/card/v2")
 public class CardControllerV2 {
 
     private final CardService cardService;
