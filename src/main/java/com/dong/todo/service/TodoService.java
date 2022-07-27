@@ -27,11 +27,12 @@ public class TodoService {
         return toEntity;
     }
 
-    public void delete(String id) {
-        //소델로 구현
+    public void delete(Long id) {
+        todoRepository.findById(id);
+
     }
 
-    public Todo read(String id) {
+    public Todo read(Long id) {
         //todoRepository.findById(id);
         return null;
     }
