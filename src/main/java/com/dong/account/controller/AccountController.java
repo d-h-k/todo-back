@@ -17,7 +17,7 @@ import static com.dong.account.dto.AccountResponseDto.pageResponse;
 import static com.dong.common.ResponseListWrapper.listWrapOk;
 import static com.dong.common.ResponseWrapper.wrapOk;
 
-@RequestMapping("api/v1/account")
+@RequestMapping("api/account/v1")
 @RestController
 @RequiredArgsConstructor
 public class AccountController {
