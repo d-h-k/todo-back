@@ -12,6 +12,6 @@ public interface CardRepository extends JpaRepository<Card, Long> {
 
     Optional<Card> findById(Long id);
 
-    @Query("select Card from Card c where c.userId = ?1 ")
-    List<Card> findByUser(Long userId);
+    //@Query("select Card from Card c where c.userId = ?1 ")
+    //List<Card> findByUser(Long userId);
 }

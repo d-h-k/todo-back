@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CardAdvRepository extends JpaRepository<Card, Long> {
-    @Query("select Card from Card c where c.userId = ?1 ")
-    List<Card> findByUser(Long userId);
+    //@Query("select Card from Card c where c.userId = ?1 ")
+    //List<Card> findByUser(Long userId);
 }
