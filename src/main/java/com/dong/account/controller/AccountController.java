@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.dong.account.dto.AccountResponseDto.pageResponse;
+import static com.dong.common.ResponseListWrapper.listWrapOk;
 import static com.dong.common.ResponseWrapper.wrapOk;
 
 @RequestMapping("api/v1/account")
@@ -27,18 +29,16 @@ public class AccountController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @PostMapping
-    public ResponseEntity<?> creatAccount(@RequestBody AccountRequestDto request) {
-        Account account = accountService.create(request.createAccount());
+    public ResponseEntity<?> makeAccount(@RequestBody AccountRequestDto request) {
+        AccountResponseDto responseDto = new AccountResponseDto(accountService.create(request.createAccount()));
 
-        new AccountResponseDto(account);
-
-        return wrapOk(account)
+        return wrapOk(responseDto)
                 .jsonResponse();
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> readAccount(@PathVariable Long id) {
+    public ResponseEntity<?> account(@PathVariable Long id) {
         AccountResponseDto responseDto = new AccountResponseDto(accountService.read(id));
 
         return wrapOk(responseDto)
@@ -46,14 +46,12 @@ public class AccountController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> readAccounts(Pageable pageable, @AuthUser Account account) {
+    public ResponseEntity<?> AccountList(Pageable pageable, @AuthUser Account account) {
         Page<Account> accounts = accountService.readPage(pageable);
-        ResponseWrapper<?> result = ResponseWrapper.wrapOk(AccountResponseDto.pages(accounts));
-        log.info("Account 정보 : {}", account.toString());
+        Page<AccountResponseDto> responseDtos = pageResponse(accounts)
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(result);
+
+        return listWrapOk(responseDtos).jsonResponse();
     }
 
 }
