@@ -6,30 +6,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    public String test() {
-        Todo todo = Todo.builder().id("98").title("ter").userId("99").build();
-        todoRepository.save(todo);
-        return "OK";
-    }
-
-
     public Todo addTodo(Todo todo) {
         return todoRepository.save(todo);
     }
 
-    public Todo update(Todo toEntity) {
-        return toEntity;
+    public Todo update(Long id, Todo todo) {
+        Todo origin = todoRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+        origin.update(todo);
+        return origin;
     }
 
-    public void delete(Long id) {
-        todoRepository.findById(id);
-
+    public Long delete(Long id) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+        todo.delete();
+        return todo.getId();
     }
 
     public Todo read(Long id) {
