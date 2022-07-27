@@ -8,15 +8,15 @@ import org.springframework.http.ResponseEntity;
 
 @Builder
 @AllArgsConstructor
-public class ApiResultWrapper<T> {
+public class ResponseWrapper<T> {
 
     private HttpStatus status;
     private T contents;
     private String message;
 
     @SuppressWarnings("unchecked : type casting is safe")
-    public static <T> ApiResultWrapper<T> wrapOk(T contents) {
-        return (ApiResultWrapper<T>) ApiResultWrapper.builder()
+    public static <T> ResponseWrapper<T> wrapOk(T contents) {
+        return (ResponseWrapper<T>) ResponseWrapper.builder()
                 .contents(contents)
                 .status(HttpStatus.OK)
                 .message(HttpStatus.OK.getReasonPhrase())
@@ -24,8 +24,8 @@ public class ApiResultWrapper<T> {
     }
 
     @SuppressWarnings("unchecked : type casting is safe")
-    public static <T> ApiResultWrapper<T> wrapCreated(T contents) {
-        return (ApiResultWrapper<T>) ApiResultWrapper.builder()
+    public static <T> ResponseWrapper<T> wrapCreated(T contents) {
+        return (ResponseWrapper<T>) ResponseWrapper.builder()
                 .contents(contents)
                 .status(HttpStatus.CREATED)
                 .message(HttpStatus.CREATED.getReasonPhrase())
@@ -33,8 +33,8 @@ public class ApiResultWrapper<T> {
     }
 
     @SuppressWarnings("unchecked : Server error returns only 500 code according to security policy")
-    public static <T> ApiResultWrapper<T> wrapFail(String message) {
-        return (ApiResultWrapper<T>) ApiResultWrapper.builder()
+    public static <T> ResponseWrapper<T> wrapFail(String message) {
+        return (ResponseWrapper<T>) ResponseWrapper.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contents(null)
                 .message(message)
