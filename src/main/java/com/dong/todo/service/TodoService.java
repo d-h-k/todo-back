@@ -19,7 +19,7 @@ public class TodoService {
     }
 
 
-    public Todo createTodo(Todo todo) {
+    public Todo addTodo(Todo todo) {
         return todoRepository.save(todo);
     }
 
