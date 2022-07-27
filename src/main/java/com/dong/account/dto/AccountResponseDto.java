@@ -24,7 +24,7 @@ public class AccountResponseDto {
         this.accountType = account.getAccountType().getDescription();
     }
 
-    public static Page<AccountResponseDto> pages(Page<Account> accounts) {
+    public static Page<AccountResponseDto> pageResponse(Page<Account> accounts) {
         List<AccountResponseDto> responseDtoList = accounts.stream()
                 .map(AccountResponseDto::new)
                 .collect(Collectors.toList());
