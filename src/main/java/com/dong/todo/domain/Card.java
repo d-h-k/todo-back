@@ -22,6 +22,8 @@ public class Card {
     private Long userId;
     private String title;
     private Long rank;
+    private Status status;
+    private boolean star;
     private boolean done;
     private boolean deleted;
 
@@ -30,6 +32,8 @@ public class Card {
         this.userId = card.userId;
         this.title = card.title;
         this.rank = card.rank;
+        this.status = card.status;
+        this.star = card.star;
         this.done = card.done;
         this.deleted = card.deleted;
     }
@@ -37,4 +41,25 @@ public class Card {
     public void delete() {
         this.deleted = true;
     }
+    public void unDelete() {
+        this.deleted = false;
+    }
+
+    public void star() {
+        this.star = true;
+    }
+
+    public void unStar() {
+        this.star = false;
+    }
+
+    public void done() {
+        this.star = true;
+    }
+
+    public void unDone() {
+        this.star = false;
+    }
+
+
 }
