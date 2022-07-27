@@ -10,45 +10,42 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 public class ApiResultWrapper<T> {
 
-    private HttpStatus httpStatus;
-    private T data;
+    private HttpStatus status;
+    private T contents;
+    private String message;
 
     @SuppressWarnings("unchecked : type casting is safe")
-    public static <T> ApiResultWrapper<T> wrapOk(T data) {
+    public static <T> ApiResultWrapper<T> wrapOk(T contents) {
         return (ApiResultWrapper<T>) ApiResultWrapper.builder()
-                .data(data)
-                .httpStatus(HttpStatus.OK)
+                .contents(contents)
+                .status(HttpStatus.OK)
+                .message(HttpStatus.OK.getReasonPhrase())
                 .build();
     }
 
     @SuppressWarnings("unchecked : type casting is safe")
-    public static <T> ApiResultWrapper<T> wrapCreated(T data) {
+    public static <T> ApiResultWrapper<T> wrapCreated(T contents) {
         return (ApiResultWrapper<T>) ApiResultWrapper.builder()
-                .data(data)
-                .httpStatus(HttpStatus.CREATED)
+                .contents(contents)
+                .status(HttpStatus.CREATED)
+                .message(HttpStatus.CREATED.getReasonPhrase())
                 .build();
     }
 
     @SuppressWarnings("unchecked : Server error returns only 500 code according to security policy")
     public static <T> ApiResultWrapper<T> wrapFail(String message) {
         return (ApiResultWrapper<T>) ApiResultWrapper.builder()
-                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-                .data(message)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .contents(null)
+                .message(message)
                 .build();
     }
 
     public ResponseEntity<?> jsonResponse() {
         return ResponseEntity
-                .status(this.httpStatus)
+                .status(this.status)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(data);
+                .body(contents);
     }
-
-    public ResponseEntity<?> response() {
-        return ResponseEntity
-                .status(this.httpStatus)
-                .body(data);
-    }
-
 
 }
