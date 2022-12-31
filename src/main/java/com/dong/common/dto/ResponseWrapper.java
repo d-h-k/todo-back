@@ -1,4 +1,4 @@
-package com.dong.common;
+package com.dong.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

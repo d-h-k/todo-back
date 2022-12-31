@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.dong.common.ResponseWrapper.wrapCreated;
-import static com.dong.common.ResponseWrapper.wrapOk;
+import static com.dong.common.dto.ResponseWrapper.wrapCreated;
+import static com.dong.common.dto.ResponseWrapper.wrapOk;
 
 @RequiredArgsConstructor
 @RestController

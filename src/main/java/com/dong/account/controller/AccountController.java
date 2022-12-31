@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static com.dong.account.dto.AccountResponseDto.pageResponse;
-import static com.dong.common.ResponseListWrapper.listWrapOk;
-import static com.dong.common.ResponseWrapper.wrapOk;
+import static com.dong.common.dto.ResponseListWrapper.listWrapOk;
+import static com.dong.common.dto.ResponseWrapper.wrapOk;
 
 @RequestMapping("api/account/v1")
 @RestController
