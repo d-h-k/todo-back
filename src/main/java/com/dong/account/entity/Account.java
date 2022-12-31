@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 public class Account {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
@@ -32,4 +33,8 @@ public class Account {
 
     @NotNull
     private Boolean quit;
+    
+    public void sd() {
+        Account.class
+    }
 }

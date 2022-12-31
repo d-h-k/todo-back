@@ -9,15 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.io.IOError;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class PreloadServiceCsvImpl implements PreloadService {
+public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
 
     @Value("${preload.filename}")
     String preloadFilename;
@@ -42,7 +44,34 @@ public class PreloadServiceCsvImpl implements PreloadService {
 
     @Override
     public List<String[]> readPreload(PreloadHandler handler) {
-        return null;
+        throw new PreloadException("Features not yet implemented");
+    }
+
+
+
+    @Override
+    @Transactional
+    public void savePreload(JpaRepository<T, Long> jpaRepository, PreloadHandler preloadHandler, Class<T> saveType) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(preloadHandler.getResource().getInputStream()) )){
+            reader.skip(1);
+            reader.iterator().forEachRemaining( s-> jpaRepository.save(TypeMapping(saveType,s)));
+        } catch (IOException e) {
+            throw new PreloadException("no");
+        }
+    }
+
+    //type mapping error 체크해보기
+    private T TypeMapping(Class<T> saveType, String[] s) {
+        Class<? extends T> clazz = saveType.asSubclass(saveType);
+        Field[] fields = saveType.getDeclaredFields();
+        try {
+            for(int i=0 ; i<fields.length ; i++) {
+                fields[i].set(clazz,s[i]);
+            }
+            return saveType.cast(clazz);
+        }catch (IllegalAccessException exception) {
+            throw new PreloadException("TypeMapping Error");
+        }
     }
 
     @Override
