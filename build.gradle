@@ -30,7 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.4.Final'
-
+	implementation group: 'com.opencsv', name: 'opencsv', version: '4.4'
 }
 
 tasks.named('test') {
