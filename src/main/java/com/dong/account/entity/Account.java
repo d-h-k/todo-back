@@ -33,8 +33,5 @@ public class Account {
 
     @NotNull
     private Boolean quit;
-    
-    public void sd() {
-        Account.class
-    }
+
 }
