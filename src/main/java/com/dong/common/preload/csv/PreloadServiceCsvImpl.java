@@ -60,7 +60,7 @@ public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
         }
     }
 
-    //type mapping error 체크해보기
+    //todo type mapping error 체크해보기
     private T TypeMapping(Class<T> saveType, String[] s) {
         Class<? extends T> clazz = saveType.asSubclass(saveType);
         Field[] fields = saveType.getDeclaredFields();
@@ -76,11 +76,11 @@ public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
 
     @Override
     public List<String[]> headerPreloadInfo(PreloadHandler handler) {
-        return null;
+        throw new RuntimeException("언제만듬? 안만듬? ㅎ..");
     }
 
     @Override
     public void writeAfter(List<String[]> writeData) {
-
+        throw new RuntimeException("언제만듬? 안만듬? ㅎ..");
     }
 }
