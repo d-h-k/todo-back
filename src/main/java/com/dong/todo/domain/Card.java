@@ -3,6 +3,7 @@ package com.dong.todo.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @NoArgsConstructor
@@ -16,10 +17,14 @@ public class Card {
     @Id
     //@GeneratedValue(generator = "system-uuid")
     //@GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(name = "user_id")
     private Long userId;
+
+
     private String title;
     private Long rank;
     private Status status;
