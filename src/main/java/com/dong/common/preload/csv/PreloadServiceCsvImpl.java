@@ -18,6 +18,9 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static com.dong.common.preload.PreloadException.INIT_FAIL;
+import static com.dong.common.preload.PreloadException.LAZY_DONG;
+
 @RequiredArgsConstructor
 public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
 
@@ -38,13 +41,13 @@ public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
             String location = resource.getFilename();
             return new PreloadHandler(resource,location,headers);
         } catch (IOException ioException) {
-            throw new PreloadException("init Fail");
+            throw new PreloadException(INIT_FAIL);
         }
     }
 
     @Override
     public List<String[]> readPreload(PreloadHandler handler) {
-        throw new PreloadException("Features not yet implemented");
+        throw new PreloadException(LAZY_DONG);
     }
 
 
@@ -56,7 +59,7 @@ public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
             reader.skip(1);
             reader.iterator().forEachRemaining( s-> jpaRepository.save(TypeMapping(saveType,s)));
         } catch (IOException e) {
-            throw new PreloadException("no");
+            throw new PreloadException("Fail to save csv");
         }
     }
 
@@ -76,11 +79,11 @@ public class PreloadServiceCsvImpl<T> implements PreloadService<T> {
 
     @Override
     public List<String[]> headerPreloadInfo(PreloadHandler handler) {
-        throw new RuntimeException("언제만듬? 안만듬? ㅎ..");
+        throw new PreloadException(LAZY_DONG);
     }
 
     @Override
     public void writeAfter(List<String[]> writeData) {
-        throw new RuntimeException("언제만듬? 안만듬? ㅎ..");
+        throw new PreloadException(LAZY_DONG);
     }
 }
