@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CardService {
@@ -35,7 +37,11 @@ public class CardService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public Page<Card> readAll() {
+    public List<Card> readAllCards(Long userId) {
         return null;
+    }
+
+    public List<Card> retrieve(String userId) {
+       return readAllCards(1L);
     }
 }
